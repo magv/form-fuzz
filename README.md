@@ -5,7 +5,7 @@ To make it work:
 - Prepare seeds with `python3 mk-seeds.sh`.
 - Prepare dictionary with `python3 mk-dict.sh`.
 - Start the fuzzers with `sh start-fuzzers.sh`.
-- Wait. Check /tmp/fuzz.
+- Wait. Check `/tmp/form-fuzz/out/*/crashes` for crashing examples.
 
 [FORM]: https://github.com/form-dev/form/
 [AFL++]: https://github.com/AFLplusplus/AFLplusplus/

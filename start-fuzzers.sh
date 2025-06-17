@@ -1,7 +1,7 @@
 set -x -e
 
 base=$(realpath "$PWD")
-tmp=${TMPDIR:-/tmp}/fuzz
+tmp=${TMPDIR:-/tmp}/form-fuzz
 
 rm -rf "$tmp"
 mkdir -p "$tmp"
@@ -27,17 +27,17 @@ fuzz() {
 }
 
 fuzz  "main"     "AFL_FINAL_SYNC=1"  "-M main"         "form"          "-"  
-fuzz  "ASAN"     ""                  "-S sub_ASAN"     "form.ASAN"     "-"  
-fuzz  "CFISAN"   ""                  "-S sub_CFISAN"   "form.CFISAN"   "-"  
-fuzz  "LSAN"     ""                  "-S sub_LSAN"     "form.LSAN"     "-"  
-fuzz  "MSAN"     ""                  "-S sub_MSAN"     "form.MSAN"     "-"  
-fuzz  "UBSAN"    ""                  "-S sub_UBSAN"    "form.UBSAN"    "-"  
-#fuzz  "tASAN"    ""                  "-S sub_ASAN"     "tform.ASAN"    "-w2 -"
-#fuzz  "tCFISAN"  ""                  "-S sub_tCFISAN"  "tform.CFISAN"  "-w2 -"
-#fuzz  "tLSAN"    ""                  "-S sub_tLSAN"    "tform.LSAN"    "-w2 -"
-#fuzz  "tMSAN"    ""                  "-S sub_tMSAN"    "tform.MSAN"    "-w2 -"
-#fuzz  "tUBSAN"   ""                  "-S sub_tUBSAN"   "tform.UBSAN"   "-w2 -"
-#fuzz  "tTSAN"    ""                  "-S sub_tTSAN"    "tform.TSAN"    "-w2 -"
+fuzz  "ASAN"     ""                  "-S ASAN"     "form.ASAN"     "-"  
+fuzz  "CFISAN"   ""                  "-S CFISAN"   "form.CFISAN"   "-"  
+fuzz  "LSAN"     ""                  "-S LSAN"     "form.LSAN"     "-"  
+fuzz  "MSAN"     ""                  "-S MSAN"     "form.MSAN"     "-"  
+fuzz  "UBSAN"    ""                  "-S UBSAN"    "form.UBSAN"    "-"  
+#fuzz  "tASAN"    ""                  "-S ASAN"     "tform.ASAN"    "-w2 -"
+#fuzz  "tCFISAN"  ""                  "-S tCFISAN"  "tform.CFISAN"  "-w2 -"
+#fuzz  "tLSAN"    ""                  "-S tLSAN"    "tform.LSAN"    "-w2 -"
+#fuzz  "tMSAN"    ""                  "-S tMSAN"    "tform.MSAN"    "-w2 -"
+#fuzz  "tUBSAN"   ""                  "-S tUBSAN"   "tform.UBSAN"   "-w2 -"
+#fuzz  "tTSAN"    ""                  "-S tTSAN"    "tform.TSAN"    "-w2 -"
 
 atexit() {
     kill $(jobs -p)
