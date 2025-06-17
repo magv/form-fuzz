@@ -1,5 +1,5 @@
 diff --git sources/startup.c sources/startup.c
-index 83f8459..5c72735 100644
+index 83f8459..5ba1b5f 100644
 --- sources/startup.c
 +++ sources/startup.c
 @@ -1743,7 +1743,7 @@ int main(int argc, char **argv)
@@ -11,8 +11,17 @@ index 83f8459..5c72735 100644
  	return(0);
  }
  /*
-diff --git a/sources/unix.h b/sources/unix.h
-index 0bd75a0..5efac68 100644
+@@ -1973,7 +1973,7 @@ backtrace_fallback: ;
+ 
+ 		MUNLOCK(ErrorMessageLock);
+ 
+-		Crash();
++		//Crash();
+ 	}
+ #ifdef TRAPSIGNALS
+ 	exitInProgress=1;
+diff --git sources/unix.h sources/unix.h
+index 0bd75a0..1076ee9 100644
 --- sources/unix.h
 +++ sources/unix.h
 @@ -33,8 +33,8 @@
@@ -26,7 +35,7 @@ index 0bd75a0..5efac68 100644
  
  /*[13jul2005 mt]:*/
  /*With SAFESIGNAL defined, write() and read() syscalls are wrapped by
-@@ -43,7 +43,7 @@ the errno checkup*/
+@@ -43,10 +43,10 @@ the errno checkup*/
  /*:[13jul2005 mt]*/
  
  /*[29apr2004 mt]:*/
@@ -34,4 +43,8 @@ index 0bd75a0..5efac68 100644
 +//#define WITHEXTERNALCHANNEL
  /*
  */
- #define TRAPSIGNALS
+-#define TRAPSIGNALS
++//#define TRAPSIGNALS
+ /*:[29apr2004 mt]*/
+ 
+ #define P_term(code)    exit((int)(code<0?-code:code))
