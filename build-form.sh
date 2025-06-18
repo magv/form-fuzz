@@ -32,10 +32,11 @@ build() {
     cp -a sources/tvorm ../bin/tvorm$suffix
 }
 build "" ""
-build ".ASAN" "AFL_USE_ASAN=1" 
-build ".CFISAN" "AFL_USE_CFISAN=1" 
-build ".LSAN" "AFL_USE_LSAN=1" 
-build ".MSAN" "AFL_USE_MSAN=1" 
-build ".TSAN" "AFL_USE_TSAN=1" 
-build ".COMPCOV" "AFL_LLVM_LAF_ALL=1" 
-build ".CMPLOG" "AFL_LLVM_CMPLOG=1"
+build ".ASAN" "AFL_USE_ASAN=1"
+build ".CFISAN" "AFL_USE_CFISAN=1"
+build ".LSAN" "AFL_USE_LSAN=1"
+build ".MSAN" "AFL_USE_MSAN=1"
+build ".UBSAN" "AFL_USE_UBSAN=1"
+#build ".TSAN" "AFL_USE_TSAN=1"
+#build ".COMPCOV" "AFL_LLVM_LAF_ALL=1"
+#build ".CMPLOG" "AFL_LLVM_CMPLOG=1"

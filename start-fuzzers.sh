@@ -4,7 +4,7 @@ base=$(realpath "$PWD")
 tmp=${TMPDIR:-/tmp}/form-fuzz
 
 rm -rf "$tmp"
-mkdir -p "$tmp"
+mkdir -p "$tmp/bin"
 cp -a "afl/afl-fuzz" "$tmp/"
 cp -a "seeds" "$tmp/seeds"
 
@@ -14,19 +14,19 @@ fuzz() {
     fuzz_args=$3
     exe=$4
     exe_args=$5
-    subdir=$tmp/$tag
+    subdir=$tmp/workdir/$tag
     mkdir -p "$subdir"
-    cp -a "bin/$exe" "$subdir/"
+    cp -a "bin/$exe" "$tmp/bin"
     env -C "$subdir" \
         "AFL_TESTCACHE_SIZE=100MB" \
         $env_args \
-        "$tmp/afl-fuzz" -a text -i "$tmp/seeds" -o "$tmp/out" -x $base/form.dict -t 5000 \
+        "$tmp/afl-fuzz" -a text -i "$tmp/seeds" -o "$tmp/out" -x "$base/form.dict" -t 5000 \
         $fuzz_args \
         -- \
-        "$subdir/$exe" $exe_args >"$subdir/log.stdout" 2>"$subdir/log.stderr" &
+        "$tmp/bin/$exe" $exe_args >"$subdir/fuzz-log.stdout" 2>"$subdir/fuzz-log.stderr" &
 }
 
-fuzz  "main"     "AFL_FINAL_SYNC=1"  "-M main"         "form"          "-"  
+fuzz  "MAIN"     "AFL_FINAL_SYNC=1"  "-M MAIN"     "form"          "-"  
 fuzz  "ASAN"     ""                  "-S ASAN"     "form.ASAN"     "-"  
 fuzz  "CFISAN"   ""                  "-S CFISAN"   "form.CFISAN"   "-"  
 fuzz  "LSAN"     ""                  "-S LSAN"     "form.LSAN"     "-"  
